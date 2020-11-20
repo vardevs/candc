@@ -20,9 +20,14 @@ async function main () {
     const gh_token = core.getInput('github-token')
 
     const number = github.context.payload.issue.number
-    const user = github.context.payload.issue.user
+    const user = github.context.payload.issue.user.login
 
-    console.log(exempt_users)
+    const exempt_list = exempt_users.split(',')
+
+    if (exempt_list.includes(user)) {
+        core.info(`${user} is allowed to create issues. Do nothing.`)
+        return
+    }
 
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`)
