@@ -1,0 +1,11 @@
+name: 'close-and-comment'
+description: 'Close issues with a comment'
+inputs:
+    exempt-users:
+        required: false
+    close-comment:
+        required: false
+        default: 'No issues allowed.'
+    github-token:
+        description: 'The GitHub PAT to use to act'
+        required: true
