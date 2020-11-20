@@ -17,4 +17,4 @@ jobs:
         id: hello
         with:
           exempt-users: varl,foo,bar
-          github-token: ${secrets.GH_TOKEN}
+          github-token: ${{secrets.GH_TOKEN}}
