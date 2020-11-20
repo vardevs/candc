@@ -19,8 +19,6 @@ async function main () {
     const close_comment = core.getInput('close-comment')
     const gh_token = core.getInput('github-token')
 
-    core.setOutput('Close with comment', close_comment)
-
     const number = github.context.payload.issue.number
     const user = github.context.payload.issue.user
 
@@ -35,15 +33,19 @@ async function main () {
     const octokit = github.getOctokit(gh_token)
     const context = github.context
 
-    await octokit.issues.createComment({
-        ...context,
-        body: close_comment,
-    })
+    try {
+        await octokit.issues.createComment({
+            ...context,
+            body: close_comment,
+        })
 
-    await octokit.issues.edit({
-        ...context,
-        state: 'closed'
-    })
+        await octokit.issues.edit({
+            ...context,
+            state: 'closed'
+        })
+    } catch (error) {
+        core.setFailed(error.message)
+    }
 
     core.info(`Closed issue ${number} from ${user}.`)
 }
