@@ -2,6 +2,7 @@ name: 'close-and-comment'
 description: 'Close issues with a comment'
 inputs:
     exempt-users:
+        description: 'Users to allow issues from'
         required: false
     close-comment:
         required: false

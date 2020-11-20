@@ -16,5 +16,5 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          exempt-users: [varl]
+          exempt-users: varl,foo,bar
           github-token: ${secrets.GH_TOKEN}
