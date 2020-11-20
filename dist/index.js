@@ -9,6 +9,10 @@ const core = __webpack_require__(186)
 const github = __webpack_require__(438)
 
 try {
+    core.startGroup('context payload')
+    core.debug(JSON.stringify(github.context.payload, undefined, 2))
+    core.endGroup()
+
     main()
 } catch (error) {
     core.setFailed(error.message)
@@ -29,13 +33,9 @@ async function main () {
         return
     }
 
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`)
-
     const octokit = github.getOctokit(gh_token)
     const context = github.context
 
-    console.log(context.repo)
     try {
         await octokit.issues.createComment({
             ...context.repo,

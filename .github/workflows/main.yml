@@ -3,18 +3,12 @@ on:
         types: [opened]
 
 jobs:
-  hello_world_job:
+  comment-and-close:
     runs-on: ubuntu-latest
-    name: Close and comment
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
-        id: hello
+      - uses: ./
         with:
           exempt-users: varl,foo,bar
           github-token: ${{secrets.GH_TOKEN}}
