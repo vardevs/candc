@@ -34,11 +34,13 @@ async function main () {
     try {
         await octokit.issues.createComment({
             ...context.repo,
+            issue_number: number,
             body: close_comment,
         })
 
-        await octokit.issues.edit({
+        await octokit.issues.update({
             ...context.repo,
+            issue_number: number,
             state: 'closed'
         })
 
